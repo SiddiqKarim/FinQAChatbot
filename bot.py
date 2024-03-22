@@ -1,7 +1,7 @@
 # **Chat Bot Start**
 
 # Libraries
-
+!python -m spacy download en_core_web_sm
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 import nltk
