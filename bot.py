@@ -11,7 +11,7 @@ nltk.download('stopwords')
 stopwords = nltk.corpus.stopwords.words('english')
 import torch
 import spacy
-import en_core_web_sm
+#import en_core_web_sm
 import subprocess
 import numpy as np
 import pandas as pd
