@@ -12,20 +12,20 @@ stopwords = nltk.corpus.stopwords.words('english')
 import torch
 import spacy
 #import en_core_web_sm
-import subprocess
+#import subprocess
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Load SpaCy English language model
-#nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_sm")
 
 # Load SpaCy English language model
-try:
+'''try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
     subprocess.call(["python", "-m", "spacy", "download", "en_core_web_sm"])
-    nlp = spacy.load("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")'''
 # Import necessary files
 
 df = pd.read_csv("Financial1.csv")
