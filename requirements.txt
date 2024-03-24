@@ -6,3 +6,5 @@ spacy
 numpy
 pandas
 matplotlib
+subprocess
+sys
