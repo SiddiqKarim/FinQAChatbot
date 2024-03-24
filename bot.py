@@ -17,7 +17,20 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Load SpaCy English language model
+import subprocess
+import sys
+
+try:
+    import spacy
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "spacy"])
+    import spacy
+
+# Download and install the 'en_core_web_sm' model if not already installed
+if not spacy.util.is_package("en_core_web_sm"):
+    subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+
+# Load the 'en_core_web_sm' model
 nlp = spacy.load("en_core_web_sm")
 
 # Load SpaCy English language model
