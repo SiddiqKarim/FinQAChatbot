@@ -44,7 +44,7 @@ except OSError:
 # Import necessary files
 
 df = pd.read_csv("Financial1.csv")
-df_mp = pd.read_excel("qa.xlsx")
+df_mp = pd.read_csv("qa.csv")
 qa_data = ""
 
 # pre Process the data
