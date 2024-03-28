@@ -22,21 +22,13 @@ import io
 import base64
 
 # Load SpaCy English language model
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    subprocess.call(["python", "-m", "spacy", "download", "en_core_web_sm"])
-    nlp = spacy.load("en_core_web_sm")
-
-
-# Load SpaCy English language model
 nlp = spacy.load("en_core_web_sm")
 
 
 # Import necessary files
 
 df = pd.read_csv("Financial1.csv")
-df_mp = pd.read_excel("qa.xlsx")
+df_mp = pd.read_csv("qa.csv")
 qa_data = ""
 
 # pre Process the data
