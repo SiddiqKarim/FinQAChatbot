@@ -30,6 +30,8 @@ except ImportError:
 if not spacy.util.is_package("en_core_web_sm"):
     subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 '''
+
+
 # Load the 'en_core_web_sm' model
 nlp = spacy.load("en_core_web_sm")
 
