@@ -1,64 +1,22 @@
 import streamlit as st
-#import pandas as pd
-#import spacy
-#from spacy.matcher import PhraseMatcher
-from PIL import Image
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
-st. set_page_config(layout="wide")
-
-# Display the logo in the sidebar
-logo_path = r"fn.jpg"
-logo_image = Image.open(logo_path)
-st.sidebar.image(logo_image, use_column_width=True)
-st.sidebar.markdown("# FickleNickle (Canada.)")
-
-
-# Streamlit App
 def main():
-    print("\nStart \n")
-    # Add a sidebar
-    st.markdown("#### Investo ChatBot 💬 📚")
-    print("session state: ", st.session_state)
+    st.title("Chatbot")
 
-    # Initialize Chat History
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-    
-    # React to user input
-    prompt = st.chat_input("What is up?")
-    print("prompt: ", prompt)
-    # Display the first user input in the chat container
-    if prompt != None:
-        #with st.chat_message("user"):
-        #   st.markdown(prompt)
-        # Append the user's input to the chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
+    # Load the model and tokenizer
+    model_name = "openchat/openchat-3.5-0106"
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-        # Display the user input at the bottom above the user input bar
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.write(message["content"])
-                       
-        # Display assistant response in the chat message container
-        with st.chat_message("assistant"):
-            response = "I am Chat Bot, Hoa about you?"
-            st.write(f"Investo: {response}")
+    # Define a pipeline for chatting
+    chat_pipeline = pipeline("text2text-generation", model=model, tokenizer=tokenizer)
 
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": f"Investo: {response}"})
-        # Display assistant response in the chat message container
-        #st.write(f"{response}")
-    print("-------------------------------------------------------------")
-    print("messages:", st.session_state.messages)
+    # Chatbot interface
+    user_input = st.text_input("You:", "")
+    if st.button("Send"):
+        response = chat_pipeline(user_input)[0]['generated_text']
+        st.text_area("Chatbot:", value=response, height=100)
 
-    # Display chat history in the chat container
-    #for message in st.session_state.messages:
-    #    with st.chat_message(message["role"]):
-    #       st.markdown(message["content"])
-
-    # Clear chat history button in the sidebar
-    if st.sidebar.button("Clear Chat"):
-        st.session_state.messages = []
-
-if __name__ == "_main_":
+if __name__ == "__main__":
     main()
