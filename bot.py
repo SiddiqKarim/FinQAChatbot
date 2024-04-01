@@ -645,7 +645,7 @@ def fun_bot(user_question):
         year_name = extract_and_year(user_question)
         #term = extract_term(user_question)
         # calling the fun_details function to extrect the information from dataset
-        
+        # calling the fun_details function to extrect the information from dataset
         if location == "fun_detail":
             result = fun_detail(company_name, year_name, intent)
             return result
