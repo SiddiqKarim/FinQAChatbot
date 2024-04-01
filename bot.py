@@ -249,14 +249,10 @@ def comparative_analysis(company_name, intent):
     for company in company_name:
         # Filter data for the specific company and financial term
         company_data = df[df['Company'].str.upper() == company]
-        # Check if filtered dataframe is empty
-        # Check if filtered dataframe is empty
-        # Check if filtered dataframe is empty
-        if company_data.empty:
-            return f"The company '{company}' is not available in our dataset."
-        else:
-            company_years[company] = company_data['Year'].values
-            company_values[company] = company_data[intent].values
+        #company_data = df[df['Company'] == company]
+        
+        company_years[company] = company_data['Year'].values
+        company_values[company] = company_data[intent].values
 
     # Plot the comparative analysis
     plt.figure(figsize=(10, 6))
