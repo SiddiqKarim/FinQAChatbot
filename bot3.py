@@ -245,7 +245,7 @@ def linear_regression_and_plot(intent, company_name):
     # Encode the image as a base64 string
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     plt.close(fig)
-    result =  f"The predicted {intent} for the next 5 years shows a trend of {trend} with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}."
+    result =  f"The predicted {intent} for the next 5 years shows a trend with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}."
     return image_base64, result
 
 # Compare the companies with specific details
