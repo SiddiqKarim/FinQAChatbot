@@ -655,9 +655,11 @@ while True:
         year_name = extract_and_year(user_question)
         #print(year_name)
         # calling the fun_details function to extrect the information from dataset
+        #print(year_name)
+        # calling the fun_details function to extrect the information from dataset
         if location == "fun_detail":
             result = fun_detail(company_name, year_name, intent)
-            return result        
+            return result
         # calling  linear_predict funciton
         elif location == "fun_predict":
             image_base64, result = linear_regression_and_plot(intent, company_name)
