@@ -1,7 +1,6 @@
 # **Chat Bot Start**
 
 # Libraries
-
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 import nltk
@@ -19,6 +18,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from datetime import datetime
+import io
+import base64
+
 # Load SpaCy English language model
 try:
     nlp = spacy.load("en_core_web_sm")
