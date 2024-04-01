@@ -289,6 +289,7 @@ def comparative_analysis(company_name, intent):
     # Encode the image as a base64 string
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     plt.close(fig)
+    fu_year = [item for sublist in future_years for item in sublist]
     result = f"This graph provides a comparative analysis of {intent} across different companies, allowing for a visual comparison of performance or metrics over time or between companies. Each line represents a different company, showing how {intent} has changed over the specified period."
     return image_base64, result
   
