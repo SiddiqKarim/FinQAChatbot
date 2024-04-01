@@ -74,7 +74,6 @@ def Cosine_distance(user_question, numbers_to_text=True):
 
 
 # Fuunction calling to get a numerical data for company
-
 # Fuunction calling to get a numerical data for company
 
 
@@ -181,8 +180,10 @@ def fun_detail(company_name, year_name, intent):
         value_detail = float(filtered_df_year[intent].iloc[0])  # Assuming 'Revenue' is the column name
         return str(value_detail)  # Convert value_detail to string
 
-
     
+    
+    
+
     
 # Linear Function to Predict the Future Values
 def linear_regression_and_plot(intent, company_name):
@@ -639,7 +640,7 @@ def fun_bot(user_question):
       
     else:   
         # Extract company name from question
-        company_name = extract_company_and_year(user_question)
+        company_name, replaced_sentence = extract_company_and_year(user_question)
         # Extract year from question
         year_name = extract_and_year(user_question)
         #term = extract_term(user_question)
