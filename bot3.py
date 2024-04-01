@@ -1,6 +1,7 @@
 # **Chat Bot Start**
 
 # Libraries
+import streamlit as st
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 import nltk
@@ -17,7 +18,6 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-from datetime import datetime
 import io
 import base64
 
