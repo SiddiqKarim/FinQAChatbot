@@ -228,10 +228,23 @@ def linear_regression_and_plot(intent, company_name):
     plt.title(f'prediction for {intent} {company_name_str}')
     plt.legend()
     plt.show()
-    fu_years = [item for sublist in future_years for item in sublist]
-    result =  f"The predicted {intent} for the next 5 years shows a trend of {trend} with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}."
-    return result
 
+    # Convert the plot to an image
+    fig, ax = plt.subplots()
+    ax.scatter(filtered_df["Year"], filtered_df[intent], color='blue', label='Actual Data')
+    ax.plot(future_years, predicted_values, color='red', label='Linear Regression')
+    #ax.plot(future_years, predicted_values)
+    ax.set_xlabel('Year')
+    ax.set_ylabel(intent)
+    ax.set_title(f'Prediction for {intent} {company_name[0]}')
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    # Encode the image as a base64 string
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    plt.close(fig)
+    result =  f"The predicted {intent} for the next 5 years shows a trend of {trend} with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}."
+    return image_base64, result
 
 # Compare the companies with specific details
 
@@ -268,6 +281,25 @@ def comparative_analysis(company_name, intent):
     # Show the plot
     plt.grid(True)
     plt.show()
+
+    # Convert the plot to an image
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for company in company_name:
+        ax.plot(company_years[company], company_values[company], label=company)
+    ax.set_xlabel('Year')
+    ax.set_ylabel(intent)
+    ax.set_title(f'Comparative Analysis of {intent} across Companies')
+    ax.legend()
+    ax.grid(True)  # Add grid
+    plt.tight_layout()  # Adjust layout
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    # Encode the image as a base64 string
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    plt.close(fig)
+    result = f"This graph provides a comparative analysis of {intent} across different companies, allowing for a visual comparison of performance or metrics over time or between companies. Each line represents a different company, showing how {intent} has changed over the specified period."
+    return image_base64, result
 
     
 # srock evaluaiton:
@@ -563,11 +595,11 @@ def extract_company_and_year(sentence):
         else:
             replaced_sentence += token.text + " "
     
-    print("Replaced Sentence:")
-    print(replaced_sentence)
-    for ent in doc.ents:
-        print("text",ent.text)
-        print("label",ent.label_)
+    #print("Replaced Sentence:")
+    #print(replaced_sentence)
+    #for ent in doc.ents:
+     #   print("text",ent.text)
+    #    print("label",ent.label_)
     return companies, replaced_sentence
 
 # How many companies Available in data
@@ -604,7 +636,7 @@ while True:
     # Get a question from the user
     user_question = input("USER: ")
     company_name, replaced_sentence = extract_company_and_year(user_question)
-    print(company_name)
+    #print(company_name)
     year_name = extract_and_year(user_question)
     #print(year_name)
     question, location, intent  = Cosine_distance(replaced_sentence)
@@ -618,68 +650,65 @@ while True:
     else:   
         # Extract company name from question
         company_name, replaced_sentence = extract_company_and_year(user_question)
-        print(company_name)
+        #print(company_name)
         # Extract year from question
         year_name = extract_and_year(user_question)
         #print(year_name)
         # calling the fun_details function to extrect the information from dataset
         if location == "fun_detail":
             result = fun_detail(company_name, year_name, intent)
-            for char in result:
-                print(char, end='', flush=True)
-                time.sleep(0.05)
-            print()
+            return result    
+        #for char in result:
+            #    print(char, end='', flush=True)
+            #    time.sleep(0.05)
+            #print()
         
         # calling  linear_predict funciton
         elif location == "fun_predict":
-            result = linear_regression_and_plot(intent, company_name)
-            #print(predicted_values)
-            #print(future_years)
-            #fu_years = [item for sublist in future_years for item in sublist]
-            #response = f"Predicted {intent} for the next 5 years: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}"
-            #print("HII")
-            print(result)
+            image_base64, result = linear_regression_and_plot(intent, company_name)
+            return result
        
         # calling comparative_analysis function
         elif location == "fun_comparative":
-            result  =  comparative_analysis(company_name, intent)
+            image_base64, result  =  comparative_analysis(company_name, intent)
             response  = "This graph provides a comparative analysis of {intent} across different companies, allowing for a visual comparison of performance or metrics over time or between companies. Each line represents a different company, showing how {intent} has changed over the specified period. ."
-            print(response)
+            return result
         
         # calling stock_valuation function
         elif location == "fun_stock":
             response = stock_valuation(company_name, year_name)
-            print(response)
+            return response
         
         # calling risk
         elif location == "fun_risk":
             response = financial_risk_assessment(company_name, year_name)
-            print(response)
+            return response
         
         #Calling capital budgeting 
         elif location == "fun_capital":
             response = perform_capital_budgeting_analysis(company_name, year_name)
-            print(response)
+            return response
         # calling investment function
         elif location == "fun_invest":
             response = should_invest(company_name)
-            print(response)
+            return response
         
         #to get date and time 
         elif location == "fun_time":
             response = current_date_time()
-            print(response)
+            return response
         
         # to get list of companies
         elif location =="list_company":
             response = list_company(df)
-            print(response)
+            return response
         
         else:
-            for char in str(location):
-                print(char, end='', flush=True)
-                time.sleep(0.05)
-            print()
+            return str(location)
+            #for char in str(location):
+            ##    print(char, end='', flush=True)
+             #   time.sleep(0.05)
+            #print()
 
 
 # Example usage
