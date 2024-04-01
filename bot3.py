@@ -655,21 +655,25 @@ while True:
         year_name = extract_and_year(user_question)
         #print(year_name)
         # calling the fun_details function to extrect the information from dataset
-        #print(year_name)
-        # calling the fun_details function to extrect the information from dataset
         if location == "fun_detail":
             result = fun_detail(company_name, year_name, intent)
-            #return result
-        # calling  linear_predict funciton
-        elif location == "fun_predict":
-            image_base64, result = linear_regression_and_plot(intent, company_name)
             return result
-       
-        # calling comparative_analysis function
+        
+        # calling fun-the linear_predict
+        elif location == "fun_predict":
+            
+            image_base64, result = linear_regression_and_plot(intent, company_name)
+            st.image(f"data:image/png;base64,{image_base64}")
+            return response            
+            
         elif location == "fun_comparative":
             image_base64, result  =  comparative_analysis(company_name, intent)
-            response  = "This graph provides a comparative analysis of {intent} across different companies, allowing for a visual comparison of performance or metrics over time or between companies. Each line represents a different company, showing how {intent} has changed over the specified period. ."
-            return result
+            # Check if the result is a message (indicating company not found)
+            result = comparative_analysis(company_name, intent)
+                # If it's an image, display it and return a response indicating the comparison graph is shown
+            image_base64 = result
+            st.image(f"data:image/png;base64,{image_base64}")
+            return "Above graph shows the comparison between the entered companies."
         
         # calling stock_valuation function
         elif location == "fun_stock":
@@ -681,27 +685,24 @@ while True:
             response = financial_risk_assessment(company_name, year_name)
             return response
         
-        #Calling capital budgeting 
+        # Calling Capital Budgeting
         elif location == "fun_capital":
             response = perform_capital_budgeting_analysis(company_name, year_name)
             return response
-        # calling investment function
+        
+        # Calling Should I Invest
         elif location == "fun_invest":
             response = should_invest(company_name)
             return response
         
-        #to get date and time 
-        elif location == "fun_time":
-            response = current_date_time()
-            return response
-        
-        # to get list of companies
-        elif location =="list_company":
-            response = list_company(df)
-            return response
-        
         else:
             return str(location)
+            '''for char in str(location):
+                print(char, end='', flush=True)
+                time.sleep(0.05)
+            print()'''
+
+
 
 
 
