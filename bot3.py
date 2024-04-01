@@ -658,10 +658,6 @@ while True:
         if location == "fun_detail":
             result = fun_detail(company_name, year_name, intent)
             return result    
-        #for char in result:
-            #    print(char, end='', flush=True)
-            #    time.sleep(0.05)
-            #print()
         
         # calling  linear_predict funciton
         elif location == "fun_predict":
@@ -705,10 +701,7 @@ while True:
         
         else:
             return str(location)
-            #for char in str(location):
-            ##    print(char, end='', flush=True)
-             #   time.sleep(0.05)
-            #print()
+
 
 
 # Example usage
