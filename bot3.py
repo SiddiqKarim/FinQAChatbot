@@ -667,7 +667,7 @@ def fun_bot(user_question):
             
             image_base64, result = linear_regression_and_plot(intent, company_name)
             st.image(f"data:image/png;base64,{image_base64}")
-            return response            
+            return result            
             
         elif location == "fun_comparative":
             image_base64, result  =  comparative_analysis(company_name, intent)
