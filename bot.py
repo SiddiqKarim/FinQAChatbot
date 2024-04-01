@@ -233,14 +233,16 @@ def linear_regression_and_plot(intent, company_name):
 # Compare the companies with specific details
 
 def comparative_analysis(company_name, intent):
+    if not company_name:
+        return "Can you please provide your query with the company name?"
     # Initialize lists to store data for each company
     company_years = {}
     company_values = {}
-
     # Fetch data for each company and financial term
+    
     for company in company_name:
         # Filter data for the specific company and financial term
-        company_data = df[df['Company'].str.upper() == company.upper()]
+        company_data = df[df['Company'].str.upper() == company]
         # Check if filtered dataframe is empty
         # Check if filtered dataframe is empty
         # Check if filtered dataframe is empty
