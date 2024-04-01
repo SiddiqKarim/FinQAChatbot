@@ -696,6 +696,15 @@ def fun_bot(user_question):
         elif location == "fun_invest":
             response = should_invest(company_name)
             return response
+        #to get date and time 
+        elif location == "fun_time":
+            response = current_date_time()
+            return response
+        
+        # to get list of companies
+        elif location =="list_company":
+            response = list_company(df)
+            return response
         
         else:
             return str(location)
