@@ -187,11 +187,17 @@ def fun_detail(company_name, year_name, intent):
 # Linear Function to Predict the Future Values
 def linear_regression_and_plot(intent, company_name):
     
+    if not company_name:
+        return "Can you please provide your query with the company name?"
     # Filter the DataFrame based on the company name
     filtered_df = df[df['Company'].str.upper() == company_name[0]]
-    # Check if filtered dataframe is empty
+    #print(filtered_df)
     if filtered_df.empty:
-        return ValueError(f"No data available for company '{company_name}'")
+        company_name_str = ', '.join([name.title() for name in company_name])
+        return f"The {company_name_str} company is not available in our database. You have to select from our company list."
+    
+    company_name_str = ', '.join([name.title() for name in company_name])
+    
     # Extract data for the specific financial term and company
     X = filtered_df["Year"].values
     y = filtered_df[intent].values
