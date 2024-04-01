@@ -630,11 +630,11 @@ def simulate_typing(answer):
     print()  # Move to the next line after the full answer is printed
 
 
-#def fun_bot(user_question):
-while True:
+def fun_bot(user_question):
+#while True:
     response_text =""
     # Get a question from the user
-    user_question = input("USER: ")
+    #user_question = input("USER: ")
     company_name, replaced_sentence = extract_company_and_year(user_question)
     #print(company_name)
     year_name = extract_and_year(user_question)
@@ -669,11 +669,11 @@ while True:
         elif location == "fun_comparative":
             image_base64, result  =  comparative_analysis(company_name, intent)
             # Check if the result is a message (indicating company not found)
-            result = comparative_analysis(company_name, intent)
+            #result = comparative_analysis(company_name, intent)
                 # If it's an image, display it and return a response indicating the comparison graph is shown
-            image_base64 = result
+            #image_base64 = result
             st.image(f"data:image/png;base64,{image_base64}")
-            return "Above graph shows the comparison between the entered companies."
+            return result
         
         # calling stock_valuation function
         elif location == "fun_stock":
