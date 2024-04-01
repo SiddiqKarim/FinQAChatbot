@@ -560,6 +560,7 @@ def should_invest(company_name):
     return decision        
 
 # Function to extract company name and year explicitly from the user question
+# Function to extract company name and year explicitly from the user question
 import string
 def extract_company_and_year(sentence):
     # Process the sentence using SpaCy
@@ -567,10 +568,33 @@ def extract_company_and_year(sentence):
     # Extract company name
     #companies = [ent.text.upper() for ent in doc.ents if ent.label_ == "ORG" or "GPE"]
     companies = [ent.text.upper() for ent in doc.ents if ent.label_ in ["ORG", "GPE","NORP"] and ent.label_ != "DATE"]
+    years = extract_and_year(sentence)
+    replaced_sentence = ""
+    for token in doc:
+        if token.text.upper() in companies:
+            replaced_sentence += "ORG "
+        elif token.text.upper() in years:
+            replaced_sentence += "DATE " 
+        else:
+            replaced_sentence += token.text + " "
+    
+    print("Replaced Sentence:")
+    print(replaced_sentence)
     for ent in doc.ents:
         print("text",ent.text)
         print("label",ent.label_)
-    return companies
+    return companies, replaced_sentence
+
+# How many companies Available in data
+def list_company(df):
+    # Remove duplicate company names from the 'Company Name' column
+    df['Companys'] = df['Company'].drop_duplicates(keep='first').reset_index(drop=True)
+    unique_companies = ', '.join([company for company in df['Companys'].astype(str).tolist() if company != 'nan'])
+    return f"\nThis is the list of companies which is avialable in out dataset: {unique_companies}"
+
+# to get Current dat and time:
+def current_date_time():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # Function to extract company name and year explicitly from the user question
 def extract_and_year(sentence):
