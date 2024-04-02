@@ -668,7 +668,7 @@ def fun_bot(user_question):
                 st.image(f"data:image/png;base64,{image_base64}")
                 fu_years = [item for sublist in future_years for item in sublist]
                 predicted_values = [round(value, 2) for value in predicted_values]
-                result =  f"The predicted {intent} for the next 5 years shows a trend with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}." 
+                result =  f"The predicted {intent} for the next 5 years shows a trend with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}. All the financial terms are in millions of USD other than the ratios." 
                 return result            
             
         elif location == "fun_comparative":
