@@ -194,14 +194,8 @@ def fun_detail(company_name, year_name, intent):
 # Linear Function to Predict the Future Values
 def linear_regression_and_plot(intent, company_name):
     
-    if not company_name:
-        return "Can you please provide your query with the company name?"
     # Filter the DataFrame based on the company name
     filtered_df = df[df['Company'].str.upper() == company_name[0]]
-    #print(filtered_df)
-    if filtered_df.empty:
-        company_name_str = ', '.join([name.title() for name in company_name])
-        return f"The {company_name_str} company is not available in our database. You have to select from our company list."
     
     company_name_str = ', '.join([name.title() for name in company_name])
     # Extract data for the specific financial term and company
@@ -662,12 +656,20 @@ def fun_bot(user_question):
         
         # calling fun-the linear_predict
         elif location == "fun_predict":
-            
-            future_years, predicted_values, image_base64 = linear_regression_and_plot(intent, company_name)
-            st.image(f"data:image/png;base64,{image_base64}")
-            fu_years = [item for sublist in future_years for item in sublist]
-            result =  f"The predicted {intent} for the next 5 years shows a trend with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}." 
-            return result            
+            if not company_name:
+                return "Can you please provide your query with the company name?"
+            # Filter the DataFrame based on the company name
+            filtered_df = df[df['Company'].str.upper() == company_name[0]]
+            #print(filtered_df)
+            if filtered_df.empty:
+                company_name_str = ', '.join([name.title() for name in company_name])
+                return f"The {company_name_str} company is not available in our database. You have to select from our company list."
+            else:
+                future_years, predicted_values, image_base64 = linear_regression_and_plot(intent, company_name)
+                st.image(f"data:image/png;base64,{image_base64}")
+                fu_years = [item for sublist in future_years for item in sublist]
+                result =  f"The predicted {intent} for the next 5 years shows a trend with projected values as follows: {fu_years[0]} = {predicted_values[0]}, {fu_years[1]} = {predicted_values[1]}, {fu_years[2]} = {predicted_values[2]}, {fu_years[3]} = {predicted_values[4]}, {fu_years[4]} = {predicted_values[4]}." 
+                return result            
             
         elif location == "fun_comparative":
             image_base64, result  =  comparative_analysis(company_name, intent)
