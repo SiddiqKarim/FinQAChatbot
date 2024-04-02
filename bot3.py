@@ -578,7 +578,7 @@ def extract_company_and_year(sentence):
     doc = nlp(sentence)
     # Extract company name
     #companies = [ent.text.upper() for ent in doc.ents if ent.label_ == "ORG" or "GPE"]
-    companies = [ent.text.upper() for ent in doc.ents if ent.label_ in ["ORG", "GPE","NORP"] and ent.label_ != "DATE"]
+    companies = [ent.text.upper() for ent in doc.ents if ent.label_ in ["ORG", "GPE","NORP","PRODUCT"] and ent.label_ != "DATE"]
     years = extract_and_year(sentence)
     replaced_sentence = ""
     for token in doc:
