@@ -244,8 +244,7 @@ def linear_regression_and_plot(intent, company_name):
 # Compare the companies with specific details
 
 def comparative_analysis(company_name, intent):
-    if not company_name:
-        return "Can you please provide your query with the company name?"
+    
     # Initialize lists to store data for each company
     company_years = {}
     company_values = {}
@@ -672,13 +671,25 @@ def fun_bot(user_question):
                 return result            
             
         elif location == "fun_comparative":
-            image_base64, result  =  comparative_analysis(company_name, intent)
+            if not company_name:
+                return "Can you please provide your query with the company name?"
+            
+            for company in company_name:
+                
+                # Filter data for the specific company and financial term
+                company_data = df[df['Company'].str.upper() == company]
+                if company_data.empty:
+                #company_name_str = ', '.join([name.title() for name in company])
+                    return f"The {company} company is not available in our database. You have to select from our company list."
+            
+            else:
+                image_base64, result  =  comparative_analysis(company_name, intent)
             # Check if the result is a message (indicating company not found)
             #result = comparative_analysis(company_name, intent)
                 # If it's an image, display it and return a response indicating the comparison graph is shown
             #image_base64 = result
-            st.image(f"data:image/png;base64,{image_base64}")
-            return result
+                st.image(f"data:image/png;base64,{image_base64}")
+                return result
         
         # calling stock_valuation function
         elif location == "fun_stock":
