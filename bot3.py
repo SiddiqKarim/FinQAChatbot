@@ -564,7 +564,7 @@ def should_invest(company_name):
     positive_criteria = sum([1 for x in [row['ROE'], row['ROA'], row['Net Profit Margin'], row['Current Ratio'], row['Free Cash Flow per Share']] if x > 0])
 
     if positive_criteria >= 3:
-        decision = "It is advisable to invest in " + row['Company'] + "\nReasons:\n" + "\n".join(reasons)
+        decision = "It is advisable to invest in " + row['Company'] + "\nReasons:\n" + "\n"",".join(reasons)
     else:
         decision = "It is not advisable to invest in " + row['Company'] + "\nReasons:\n" + "\n".join(reasons)
     
