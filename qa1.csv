@@ -24,7 +24,7 @@ Bye for now,"Goodbye for now! If you have more questions later, feel free to ask
 Bye-bye,"Goodbye! If you have any more questions in the future, feel free to ask.",greeting
 Goodbye and take care,"Goodbye and take care! If you have more questions later, feel free to ask.",greeting
 hey there,"Hey, I'm an AI Financial Q & A designed bot to assist you. ",greeting
-What is TFSA?,"TFSA. ",greeting
+What is TFSA? TFSA? ,"TFSA. ",greeting
 "Give me the list of company, How many company are you working with?",list_company,
 "What is Market Capitalization? What s Market Cap? Give me the definition of Market Capitalization?, give me the description of Market capitalization.","Market capitalization, or ""market cap,"" represents the total dollar market value of a company's outstanding shares of stock. Investors use this figure to determine a company's size instead of sales or total asset value. In an acquisition, the market cap helps determine whether a takeover candidate represents a good value for the acquirer.",general
 What is Revenue? Give me the definition of Revenue.,"Revenue is the money generated from normal business operations, calculated as the average sales price times the number of units sold. It is the top line (or gross income) figure from which costs are subtracted to determine net income. Revenue is also known as sales on the income statement.",general
