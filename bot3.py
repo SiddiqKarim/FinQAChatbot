@@ -167,7 +167,7 @@ def fun_detail(company_name, year_name, intent):
                     elif intent in [ "Net Profit Margin"]:
                         value_detail = float(filtered_df_year[intent].iloc[0])  # Assuming 'intent' is the Net Profit Margin
                         result.append(f"In {year}, {company_name_str}'s net profit margin was {str(value_detail)}%. Net profit margin is a profitability ratio that measures how much of every dollar of revenue a company actually keeps in earnings after accounting for all expenses. A higher net profit margin indicates that a company is more efficient at generating profits from its revenue, while a lower net profit margin suggests that a company may be less efficient at generating profits from its revenue.")
-                    elif intent in ["Free Cash Flow pe Share"]:
+                    elif intent in ["Free Cash Flow per Share"]:
                         value_detail = float(filtered_df_year[intent].iloc[0])  # Assuming 'intent' is the Free Cash Flow pe Share
                         result.append(f"In {year}, {company_name_str}'s Free Cash Flow per Share was ${str(value_detail)}. Free Cash Flow per Share is a measure of the amount of cash a company generates per share of its stock, after accounting for capital expenditures. It indicates the cash available to shareholders after all expenses and investments have been paid for.")
                     else:
