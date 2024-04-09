@@ -109,7 +109,7 @@ def fun_detail(company_name, year_name, intent):
         result = []
         for year in year_name:
             if int(year) < df['Year'].min() or int(year) > df['Year'].max():
-                result.append(f"The {company_name_str} company financial report is just available between {df['Year'].min()} to {df['Year'].max()} as the provided year {year} is not in our database.")
+                result.append(f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year} is not in our database.")
             else:
                 filtered_df_year = filtered_df[filtered_df['Year'] == int(year)]
                 if filtered_df_year.empty:
