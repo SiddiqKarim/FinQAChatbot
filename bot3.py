@@ -240,7 +240,7 @@ def linear_regression_and_plot(intent, company_name):
     # Encode the image as a base64 string
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     plt.close(fig)
-    return int(future_years), predicted_values, image_base64
+    return future_years, predicted_values, image_base64
 
 # Compare the companies with specific details
 
