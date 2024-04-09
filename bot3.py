@@ -108,7 +108,7 @@ def fun_detail(company_name, year_name, intent):
         # Check each year in the list
         result = []
         for year in year_name:
-            if int(year) < df['Year'].min() or int(year) > df['Year'].max():
+            if int(year) < int(df['Year'].min()) or int(year) > int(df['Year'].max()):
                 result.append(f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year} is not in our database.")
             else:
                 filtered_df_year = filtered_df[filtered_df['Year'] == int(year)]
@@ -179,8 +179,8 @@ def fun_detail(company_name, year_name, intent):
     else:
         # Check if any data is available after filtering
         
-        if int(year_name) < df['Year'].min() or int(year_name) > df['Year'].max():
-            return f"The {company_name_str} company financial report is just available between {df['Year'].min()} to {df['Year'].max()} as the provided year {year_name} is not in our database."
+        if int(year_name) < int(df['Year'].min()) or int(year_name) > int(df['Year'].max()):
+            return f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year_name} is not in our database."
         
         filtered_df_year = filtered_df[filtered_df['Year'] == int(year_name)]
         if filtered_df_year.empty:
@@ -240,7 +240,7 @@ def linear_regression_and_plot(intent, company_name):
     # Encode the image as a base64 string
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     plt.close(fig)
-    return future_years, predicted_values, image_base64
+    return int(future_years), predicted_values, image_base64
 
 # Compare the companies with specific details
 
@@ -318,8 +318,8 @@ def stock_valuation(company_name, year_name):
         # Check each year in the list
         result = []
         for year in year_name:
-            if int(year) < df['Year'].min() or int(year) > df['Year'].max():
-                result.append(f"The {company_name_str} company financial report is just available between {df['Year'].min()} to {df['Year'].max()} as the provided year {year} is not in our database.")
+            if int(year) < int(df['Year'].min()) or int(year) > int(df['Year'].max()):
+                result.append(f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year} is not in our database.")
             else:
                 filtered_df_year = filtered_df[filtered_df['Year'] == int(year)]
                 if filtered_df_year.empty:
@@ -348,8 +348,8 @@ def stock_valuation(company_name, year_name):
 
     else:
         # Check if any data is available after filtering
-        if int(year_name) < df['Year'].min() or int(year_name) > df['Year'].max():
-            return f"The {company_name_str} company financial report is just available between {df['Year'].min()} to {df['Year'].max()} as the provided year {year_name} is not in our database."
+        if int(year_name) < int(df['Year'].min()) or int(year_name) > int(df['Year'].max()):
+            return f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year_name} is not in our database."
         
         filtered_df_year = filtered_df[filtered_df['Year'] == int(year_name)]
         if filtered_df_year.empty:
@@ -397,8 +397,8 @@ def financial_risk_assessment(company_name, year_name):
         # Check each year in the list
         result = []
         for year in year_name:
-            if int(year) < df['Year'].min() or int(year) > df['Year'].max():
-                result.append(f"The {company_name_str} company financial report is just available between {df['Year'].min()} to {df['Year'].max()} as the provided year {year} is not in our database.")
+            if int(year) < int(df['Year'].min()) or int(year) > int(df['Year'].max()):
+                result.append(f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year} is not in our database.")
             else:
                 filtered_df_year = filtered_df[filtered_df['Year'] == int(year)]
                 if filtered_df_year.empty:
@@ -433,8 +433,8 @@ def financial_risk_assessment(company_name, year_name):
 
     else:
         # Check if any data is available after filtering
-        if int(year_name) < df['Year'].min() or int(year_name) > df['Year'].max():
-            return f"The {company_name_str} company financial report is just available between {df['Year'].min()} to {df['Year'].max()} as the provided year {year_name} is not in our database."
+        if int(year_name) < int(df['Year'].min()) or int(year_name) > int(df['Year'].max()):
+            return f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year_name} is not in our database."
         
         filtered_df_year = filtered_df[filtered_df['Year'] == int(year_name)]
         if filtered_df_year.empty:
