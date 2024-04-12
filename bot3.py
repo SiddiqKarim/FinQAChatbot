@@ -398,7 +398,7 @@ def financial_risk_assessment(company_name, year_name):
         result = []
         for year in year_name:
             if int(year) < int(df['Year'].min()) or int(year) > int(df['Year'].max()):
-                result.append(f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year} is not in our database.")
+                result.append(f"The {company_name_str} company financial report is just available between {int(df['Year'].min())} to {int(df['Year'].max())} as the provided year {year[0]} is not in our database.")
             else:
                 filtered_df_year = filtered_df[filtered_df['Year'] == int(year)]
                 if filtered_df_year.empty:
@@ -418,17 +418,17 @@ def financial_risk_assessment(company_name, year_name):
                     rote = company_data['Return on Tangible Equity'].values[0]
 
                     # Explanation for Net Profit Margin
-                    net_profit_margin_explanation = f" Financial Risk Assessment Results: Net Profit Margin: The Net Profit Margin of {company_name_str} for the year {year_name} is {net_profit_margin:.2f}%. This metric indicates the percentage of revenue that remains as net income after all expenses have been deducted. A higher net profit margin suggests better profitability and financial health."
+                    net_profit_margin_explanation = f" Financial Risk Assessment Results: Net Profit Margin: The Net Profit Margin of {company_name_str} for the year {year_name[0]} is {net_profit_margin:.2f}%. This metric indicates the percentage of revenue that remains as net income after all expenses have been deducted. A higher net profit margin suggests better profitability and financial health."
 
                     # Explanation for Debtor Equity Ratio
-                    debtor_equity_ratio_explanation = f"Debtor Equity Ratio: The Debtor Equity Ratio of {company_name_str} for the year {year_name} is {debtor_equity_ratio:.2f}. This ratio measures the relationship between a company's total debt and its shareholder equity. A higher debtor equity ratio indicates higher financial leverage, which can increase financial risk."
+                    debtor_equity_ratio_explanation = f"Debtor Equity Ratio: The Debtor Equity Ratio of {company_name_str} for the year {year_name[0]} is {debtor_equity_ratio:.2f}. This ratio measures the relationship between a company's total debt and its shareholder equity. A higher debtor equity ratio indicates higher financial leverage, which can increase financial risk."
 
                     # Explanation for Return on Tangible Equity
-                    rote_explanation = f" Return on Tangible Equity:The Return on Tangible Equity (ROTE) of {company_name_str} for the year {year_name} is {rote:.2f}%. This metric assesses a company's profitability relative to its tangible equity capital. A higher ROTE indicates better efficiency in generating returns for shareholders."
+                    rote_explanation = f" Return on Tangible Equity: The Return on Tangible Equity (ROTE) of {company_name_str} for the year {year_name[0]} is {rote:.2f}%. This metric assesses a company's profitability relative to its tangible equity capital. A higher ROTE indicates better efficiency in generating returns for shareholders."
 
                     # Combine all explanations into a single formatted string
                     
-                    result.extend(["Financial Risk Assessment Results:",net_profit_margin_explanation, debtor_equity_ratio_explanation,rote_explanation])
+                    result.extend([net_profit_margin_explanation, debtor_equity_ratio_explanation, rote_explanation])
         return "\n".join(result)  # Return single result or list of results
 
     else:
